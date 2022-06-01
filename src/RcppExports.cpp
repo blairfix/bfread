@@ -11,15 +11,15 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// get_data
-DataFrame get_data(std::string filename, std::vector<int> ids);
-RcppExport SEXP _bfread_get_data(SEXP filenameSEXP, SEXP idsSEXP) {
+// get_data_old
+DataFrame get_data_old(std::string filename, IntegerVector ids);
+RcppExport SEXP _bfread_get_data_old(SEXP filenameSEXP, SEXP idsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string >::type filename(filenameSEXP);
-    Rcpp::traits::input_parameter< std::vector<int> >::type ids(idsSEXP);
-    rcpp_result_gen = Rcpp::wrap(get_data(filename, ids));
+    Rcpp::traits::input_parameter< IntegerVector >::type ids(idsSEXP);
+    rcpp_result_gen = Rcpp::wrap(get_data_old(filename, ids));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -74,7 +74,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_bfread_get_data", (DL_FUNC) &_bfread_get_data, 2},
+    {"_bfread_get_data_old", (DL_FUNC) &_bfread_get_data_old, 2},
     {"_bfread_get_ngrams", (DL_FUNC) &_bfread_get_ngrams, 1},
     {"_bfread_read_column", (DL_FUNC) &_bfread_read_column, 3},
     {"_bfread_read_delim", (DL_FUNC) &_bfread_read_delim, 2},
