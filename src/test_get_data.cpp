@@ -12,7 +12,7 @@ using namespace Rcpp;
 // [[Rcpp::export]]
 
 
-DataFrame test_get_data(
+DataFrame get_data_test(
 		    std::string filename,
 		    Rcpp::IntegerVector ids
                    )
