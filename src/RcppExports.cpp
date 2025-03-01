@@ -12,13 +12,13 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // get_data
-DataFrame get_data(std::string filename, IntegerVector ids);
+DataFrame get_data(std::string filename, Rcpp::IntegerVector ids);
 RcppExport SEXP _bfread_get_data(SEXP filenameSEXP, SEXP idsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< std::string >::type filename(filenameSEXP);
-    Rcpp::traits::input_parameter< IntegerVector >::type ids(idsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type ids(idsSEXP);
     rcpp_result_gen = Rcpp::wrap(get_data(filename, ids));
     return rcpp_result_gen;
 END_RCPP
@@ -72,18 +72,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// get_data_test
-DataFrame get_data_test(std::string filename, Rcpp::IntegerVector ids);
-RcppExport SEXP _bfread_get_data_test(SEXP filenameSEXP, SEXP idsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< std::string >::type filename(filenameSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type ids(idsSEXP);
-    rcpp_result_gen = Rcpp::wrap(get_data_test(filename, ids));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_bfread_get_data", (DL_FUNC) &_bfread_get_data, 2},
@@ -91,7 +79,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_bfread_read_column", (DL_FUNC) &_bfread_read_column, 3},
     {"_bfread_read_delim", (DL_FUNC) &_bfread_read_delim, 2},
     {"_bfread_read_sql", (DL_FUNC) &_bfread_read_sql, 3},
-    {"_bfread_get_data_test", (DL_FUNC) &_bfread_get_data_test, 2},
     {NULL, NULL, 0}
 };
 
