@@ -13,9 +13,9 @@ using namespace Rcpp;
 
 
 DataFrame get_data_test(
-		    std::string filename,
-		    Rcpp::IntegerVector ids
-                   )
+	std::string filename,
+	Rcpp::IntegerVector ids
+	)
 {
 
     // 1. test if file exists
@@ -23,12 +23,12 @@ DataFrame get_data_test(
     ifile.open(filename);
     if(ifile) {
     } else {
-        throw std::range_error("File does not exist");
+	throw std::range_error("File does not exist");
     }
 
 
     if( ids.size() == 0 ){
-        throw std::range_error("ids vector is blank");
+	throw std::range_error("ids vector is blank");
     }
 
 
@@ -54,38 +54,42 @@ DataFrame get_data_test(
     // read in file and get data with rows in id vector
     while (getline(in, ngram) ) {
 
-        // test if line in id and counter is not over nwords
-        if( line_number == ids[id_counter] && id_counter < nwords ){
+	// test if id counter still within bounds
+	if(  id_counter < nwords ){
 
-	    // advance word counter
-            id_counter++;
+	    // test if we want this ngram line
+	    if( line_number == ids[id_counter] ){
 
-            // split line on tab
-            std::vector<std::string> line_split;
-            boost::split(line_split, ngram, boost::is_any_of("\t") );
+		// advance word counter
+		id_counter++;
 
-            if( line_split.size() > 1 ){
+		// split line on tab
+		std::vector<std::string> line_split;
+		boost::split(line_split, ngram, boost::is_any_of("\t") );
 
-                // make word lower case
-                boost::to_lower( line_split[0] );
+		if( line_split.size() > 1 ){
 
-                // loop over data
-                for(int i = 1; i < line_split.size(); i++){
+		    // make word lower case
+		    boost::to_lower( line_split[0] );
 
-                    // split data on comma
-                    std::vector<std::string> data;
-                    boost::split(data,  line_split[i], boost::is_any_of(",") );
+		    // loop over data
+		    for( int i = 1; i < line_split.size(); i++){
 
-                    // append data
-                    word_vec.emplace_back( line_split[0] );
-                    year_vec.emplace_back( std::stoi( data[0] ) );
-                    wordcount_vec.emplace_back( std::stoi( data[1] ) );
+			// split data on comma
+			std::vector<std::string> data;
+			boost::split(data,  line_split[i], boost::is_any_of(",") );
 
-                }
-            }
-        }
+			// append data
+			word_vec.emplace_back( line_split[0] );
+			year_vec.emplace_back( std::stoi( data[0] ) );
+			wordcount_vec.emplace_back( std::stoi( data[1] ) );
 
-        line_number++;
+		    }
+		}
+	    }
+	}
+
+	line_number++;
     }
 
 
@@ -93,10 +97,10 @@ DataFrame get_data_test(
     // -----------------------------------------------------
 
     DataFrame output = DataFrame::create(
-        Named("word") =      word_vec,
-        Named("year") =      year_vec,
-        Named("wordcount") = wordcount_vec
-    );
+	    Named("word") =      word_vec,
+	    Named("year") =      year_vec,
+	    Named("wordcount") = wordcount_vec
+	    );
 
     return output;
 
