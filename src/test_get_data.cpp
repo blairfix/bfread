@@ -36,15 +36,9 @@ DataFrame test_get_data(
     // -----------------------------------------------------
 
     // output vectors
-    std::list<std::string> word_vec;
-    std::list<double> year_vec;
-    std::list<double> wordcount_vec;
-
-    // reserve space
-    //int reserve = 10000000;
-    //word_vec.reserve(reserve);
-    //year_vec.reserve(reserve);
-    //wordcount_vec.reserve(reserve);
+    std::deque<std::string> word_vec;
+    std::deque<double> year_vec;
+    std::deque<double> wordcount_vec;
 
 
     // read in ngram
