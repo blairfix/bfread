@@ -21,3 +21,7 @@ read_sql <- function(filename, table, get_columns) {
     .Call('_bfread_read_sql', PACKAGE = 'bfread', filename, table, get_columns)
 }
 
+get_data_test <- function(filename, ids) {
+    .Call('_bfread_get_data_test', PACKAGE = 'bfread', filename, ids)
+}
+
