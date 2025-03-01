@@ -41,10 +41,10 @@ DataFrame test_get_data(
     std::list<double> wordcount_vec;
 
     // reserve space
-    int reserve = 10000000;
-    word_vec.reserve(reserve);
-    year_vec.reserve(reserve);
-    wordcount_vec.reserve(reserve);
+    //int reserve = 10000000;
+    //word_vec.reserve(reserve);
+    //year_vec.reserve(reserve);
+    //wordcount_vec.reserve(reserve);
 
 
     // read in ngram
